@@ -1,50 +1,47 @@
-const city = document.querySelector('.city');
-const temperature = document.querySelector('.temperature');
+const cityEl = document.querySelector('.city');
+const currentTempEl = document.querySelector('#currentTemp');
+const lowTempEl = document.querySelector('#lowTemp');
+const highTempEl = document.querySelector('#highTemp');
 const weatherIcon = document.querySelector('.weatherIcon');
-const conditions = document.querySelector('.conditions');
+const conditions = document.querySelector('#conditions');
 
-// let lat = "39.9526";
-// let lon = "-75.1652";
-let lat, lon;
-let locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=KEY`;
+let lat, lon, locationData, temp, currentTemp, minTemp, maxTemp;
 
-$.ajax({
-  url: locationData,
-  method: "GET"
-}).then(function(response) {
-  let currentTemp = response.main.temp;
-  let minTemp = response.main.temp_min
-  let maxTemp = response.main.temp_max
-  let currentConditions = response.weather[0].main;
-  let city = response.name;
-  console.log("temp is " + currentTemp);
-  console.log("conditions are  " + currentConditions);
-  console.log("city  " + city);
-  console.log("Low is " + minTemp);
-  console.log("High is " + maxTemp);
-});
-
-//get location coordinates
 function success(pos) {
-  var crd = pos.coords;
-  lat = crd.latitude;
-  lon = crd.longitude
+  lat = pos.coords.latitude;
+  lon = pos.coords.longitude
 
-  console.log('Your current position is:');
-  console.log('Latitude: ' + lat);
-  console.log('Longitude: ' + lon);
+  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=KEY`;
+
+  $.ajax({
+    url: locationData,
+    method: "GET"
+  }).then(function(response) {
+    currentTemp = response.main.temp;
+    minTemp = response.main.temp_min;
+    maxTemp = response.main.temp_max;
+    let currentConditions = response.weather[0].main;
+    let city = response.name;
+    cityEl.textContent = city;
+    conditions.textContent = currentConditions;
+    let icon = response.weather[0].icon;
+    weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}@2x.png">`;
+    renderTemps();
+  });
 }
 
 navigator.geolocation.getCurrentPosition(success);
 
-function updateTemp(){
-
+function convertTemp(k){
+ temp = Math.round(((k - 273.15) * 1.8) + 32) + ' F';
+ return temp;
 }
 
-function updateImage(){
-
-}
-
-function updateConditions(){
-
+function renderTemps(){
+  currentTemp = convertTemp(currentTemp);
+  currentTempEl.textContent = currentTemp;
+  minTemp = convertTemp(minTemp);
+  lowTempEl.textContent = minTemp;
+  maxTemp = convertTemp(maxTemp);
+  highTempEl.textContent = maxTemp;
 }
