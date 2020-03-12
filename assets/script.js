@@ -3,21 +3,39 @@ const temperature = document.querySelector('.temperature');
 const weatherIcon = document.querySelector('.weatherIcon');
 const conditions = document.querySelector('.conditions');
 
-let lat = "39.9";
-let lon = "-75";
-let locationData = "https://www.metaweather.com/api/location/search/?lattlong=" + lat + "," + lon;
-console.log(locationData);
+// let lat = "39.9526";
+// let lon = "-75.1652";
+let lat, lon;
+let locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=KEY`;
 
-// let woeid = "2471217" // x[0].woeid;
-// let city = x.title;
-// currentConditions = x.consolidated_weather[0].weather_state_name;
-// let minTemp = x.consolidated_weather[0].min_temp;
-// let maxTemp = x.consolidated_weather[0].max_temp;
-// let currentTemp = x.consolidated_weather[0].the_temp;
+$.ajax({
+  url: locationData,
+  method: "GET"
+}).then(function(response) {
+  let currentTemp = response.main.temp;
+  let minTemp = response.main.temp_min
+  let maxTemp = response.main.temp_max
+  let currentConditions = response.weather[0].main;
+  let city = response.name;
+  console.log("temp is " + currentTemp);
+  console.log("conditions are  " + currentConditions);
+  console.log("city  " + city);
+  console.log("Low is " + minTemp);
+  console.log("High is " + maxTemp);
+});
 
-function getLocation(){
+//get location coordinates
+function success(pos) {
+  var crd = pos.coords;
+  lat = crd.latitude;
+  lon = crd.longitude
 
+  console.log('Your current position is:');
+  console.log('Latitude: ' + lat);
+  console.log('Longitude: ' + lon);
 }
+
+navigator.geolocation.getCurrentPosition(success);
 
 function updateTemp(){
 
