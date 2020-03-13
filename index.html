@@ -9,11 +9,12 @@
 <body>
   <div class="container">
     <h1>The Weather in <span class="city">Your City</span></h1>
-    <p class="temperature">Current Temperature <span id="currentTemp"></span></p>
-    <p class="temperature">Today's Low <span id="lowTemp"></span></p>
-    <p class="temperature">Today's High <span id="highTemp"></span></p>
-    <p class="weatherIcon"></p>
-    <p>Current Conditions <span id='conditions'></span></p>
+    <div class="weatherData">
+      <h2 class="temperature">Current Temperature: <span id="currentTemp"></span></h2>
+      <p class="weatherIcon"></p>
+      <p>Current Conditions: <span id='conditions'></span></p>
+      <p class="temperature">Today's Low: <span id="lowTemp"></span>  |  Today's High: <span id="highTemp"></span></p>
+    </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="assets/script.js"></script>

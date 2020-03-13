@@ -2,3 +2,16 @@ body {
   background-color: #01BFFF;
   font-family: 'Bellota', cursive;
 }
+
+.container {
+  height: 50vh;
+  background-color: #FFFFFF;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.weatherData {
+  visibility: hidden;
+}

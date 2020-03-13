@@ -4,6 +4,7 @@ const lowTempEl = document.querySelector('#lowTemp');
 const highTempEl = document.querySelector('#highTemp');
 const weatherIcon = document.querySelector('.weatherIcon');
 const conditions = document.querySelector('#conditions');
+const dataDisplay = document.querySelector('.weatherData');
 
 let lat, lon, locationData, temp, currentTemp, minTemp, maxTemp;
 
@@ -27,6 +28,8 @@ function success(pos) {
     let icon = response.weather[0].icon;
     weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}@2x.png">`;
     renderTemps();
+    dataDisplay.style.visibility = 'visible';
+    console.log("function done");
   });
 }
 
