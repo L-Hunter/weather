@@ -1,3 +1,4 @@
+var mykey = config.MY_KEY;
 const cityEl = document.querySelector('.city');
 const currentTempEl = document.querySelector('#currentTemp');
 const lowTempEl = document.querySelector('#lowTemp');
@@ -12,7 +13,7 @@ function success(pos) {
   lat = pos.coords.latitude;
   lon = pos.coords.longitude
 
-  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=KEY`;
+  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${mykey}`;
 
   $.ajax({
     url: locationData,
