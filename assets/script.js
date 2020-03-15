@@ -1,4 +1,3 @@
-var mykey = config.MY_KEY;
 const cityEl = document.querySelector('.city');
 const currentTempEl = document.querySelector('#currentTemp');
 const lowTempEl = document.querySelector('#lowTemp');
@@ -13,7 +12,7 @@ function success(pos) {
   lat = pos.coords.latitude;
   lon = pos.coords.longitude
 
-  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${mykey}`;
+  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4d322b9799fae10028150e5d631831b5`;
 
   $.ajax({
     url: locationData,
@@ -30,7 +29,6 @@ function success(pos) {
     weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}@2x.png">`;
     renderTemps();
     dataDisplay.style.visibility = 'visible';
-    console.log("function done");
   });
 }
 
