@@ -12,7 +12,7 @@ function success(pos) {
   lat = pos.coords.latitude;
   lon = pos.coords.longitude
 
-  locationData = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4d322b9799fae10028150e5d631831b5`;
+  locationData = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4d322b9799fae10028150e5d631831b5`;
 
   $.ajax({
     url: locationData,
